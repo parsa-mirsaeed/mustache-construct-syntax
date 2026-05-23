@@ -1,24 +1,32 @@
 # MCS – Mustache Construct Syntax
 
-A parametric visual language to define, analyze, and generate mustaches based on Golden Age aesthetics.
+**A parametric visual programming language for defining, analyzing, and generating mustache styles based on Golden Age aesthetics.**
 
-### Variables
-| Parameter  | Values                     | Description                       |
-|------------|----------------------------|-----------------------------------|
-| height     | `all`, `semi`, `none`      | Column height (philtrum fill)     |
-| angle      | `horizontal`, `diagonal`, `upward` | Wing orientation (θ)            |
-| gap        | `true`, `false`            | GCC (Gap Centered Column)         |
-| lip        | `over`, `on`, `linegap`    | Vertical position relative to lip |
-| extended   | `true`, `false`            | Wings past mouth corners          |
-| radius     | `flat`, `round`            | Top of column shape (R)           |
-| thickness  | 1 – 10 (scale)             | Hair block density (ρ)            |
+## 🧔 Overview
 
-### Quick Start
-1. Open `index.html` in your browser for the visual editor.
-2. `node cli/generate.js` for terminal SVG generation.
-3. Import `mcs-engine.js` into your own projects.
+MCS is a rigorous, mathematical system that treats every mustache as a configuration of **8 independent variables**. It includes a web-based visual editor, a JavaScript rendering engine, and a CLI tool for generating SVG outputs.
 
-### Examples
-- Clark Gable: `{ height: "all", angle: "diagonal", gap: false, lip: "over", extended: true, radius: "flat", thickness: 8 }`
-- Vincent Price: `{ height: "semi", angle: "diagonal", gap: false, lip: "over", extended: false, radius: "flat", thickness: 3 }`
-- My Grandfather: `{ height: "all", angle: "horizontal", gap: false, lip: "linegap", extended: false, radius: "flat", thickness: 5 }`
+## 📐 The 8 Variables
+
+| Variable | Values | Description |
+| :--- | :--- | :--- |
+| **Height** | `all`, `semi`, `none` | Column height (philtrum fill) |
+| **Angle** | `horizontal`, `diagonal`, `upward` | Wing orientation (θ) |
+| **GCC (Gap Centered Column)** | `true`, `false` | Splits the column with a central gap |
+| **Lip Position** | `over`, `on`, `linegap` | Vertical position relative to the lip line |
+| **Extended Wings** | `true`, `false` | Wings extend past mouth corners |
+| **Radius (Top)** | `flat`, `round` | Shape of the top of the column |
+| **Thickness (ρ)** | `1` – `10` | Hair block density |
+| **Wing Shape** | `rectangular`, `triangular` | Shape of the wing ends |
+
+## 🚀 Quick Start
+
+### Web Interface
+1. Open `index.html` in your browser.
+2. Adjust the sliders and dropdowns to create your mustache.
+3. Click any preset button to load a classic style.
+4. Copy the JSON output for your records.
+
+### CLI Tool (Node.js)
+```bash
+node cli/generate.js examples/gable.json gable.svg
