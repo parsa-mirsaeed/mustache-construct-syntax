@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Seyed Parsa Qazi MirSaeed">
+    <meta name="copyright" content="Copyright (C) 2026 Seyed Parsa Qazi MirSaeed. All Rights Reserved.">
+    <title>MCS – Mustache Construct Syntax</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: #2d2d2d; padding: 30px; border-radius: 20px; max-width: 800px; width: 100%; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        h1 { text-align: center; letter-spacing: -1px; font-weight: 300; border-bottom: 1px solid #444; padding-bottom: 10px; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .control-group { display: flex; flex-direction: column; }
+        label { font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
+        select, input[type="range"] { background: #333; color: white; border: 1px solid #555; padding: 6px; border-radius: 6px; width: 100%; }
+        .preview { background: white; border-radius: 12px; display: flex; justify-content: center; padding: 20px; margin: 20px 0; }
+        .presets { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 15px; }
+        .preset-btn { background: #444; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
+        .preset-btn:hover { background: #666; transform: scale(1.05); }
+        .code-box { background: #111; padding: 15px; border-radius: 8px; font-size: 0.7rem; overflow-x: auto; white-space: pre-wrap; color: #0f0; }
+        .footer { text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #444; font-size: 0.7rem; color: #888; }
+        .footer a { color: #aaa; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧔 MCS Studio</h1>
+    <div class="controls">
+        <div class="control-group"><label>Height</label><select id="height"><option value="all">All Height</option><option value="semi">Semi Height</option><option value="none">No Column</option></select></div>
+        <div class="control-group"><label>Angle</label><select id="angle"><option value="horizontal">Horizontal (0°)</option><option value="diagonal">Diagonal (-12°)</option><option value="upward">Upward (+12°)</option></select></div>
+        <div class="control-group"><label>GCC (Gap)</label><select id="gap"><option value="false">Solid Column</option><option value="true">Gap Centered</option></select></div>
+        <div class="control-group"><label>Lip Position</label><select id="lip"><option value="over">Over Lip</option><option value="on">On Lip</option><option value="linegap">Line Gap</option></select></div>
+        <div class="control-group"><label>Extended Wings</label><select id="extended"><option value="false">Fixed</option><option value="true">Extended</option></select></div>
+        <div class="control-group"><label>Radius (Top)</label><select id="radius"><option value="flat">Flat</option><option value="round">Round</option></select></div>
+        <div class="control-group"><label>Wing Shape</label><select id="wingShape"><option value="rectangular">Rectangular Ends</option><option value="triangular">Triangular Ends</option></select></div>
+        <div class="control-group" style="grid-column: 1 / -1;"><label>Thickness (ρ) <span id="thickness-val">5</span></label><input type="range" id="thickness" min="1" max="10" value="5" step="1"></div>
+    </div>
+
+    <div class="preview" id="preview-container"><svg id="preview-svg" width="300" height="150"></svg></div>
+
+    <div class="code-box" id="json-output">{}</div>
+
+    <div class="presets">
+        <button class="preset-btn" data-preset="grandfather">Your Grandfather</button>
+        <button class="preset-btn" data-preset="guy">Guy Williams</button>
+        <button class="preset-btn" data-preset="tyrone">Tyrone Power</button>
+        <button class="preset-btn" data-preset="gable">Clark Gable</button>
+        <button class="preset-btn" data-preset="price">Vincent Price</button>
+    </div>
+
+    <div class="footer">
+        MCS (Mustache Construct Syntax) – Copyright &copy; 2026 <strong>Seyed Parsa Qazi MirSaeed</strong>. All Rights Reserved.<br>
+        <small>Licensed for personal, non-commercial research use only.</small>
+    </div>
+</div>
+<script src="mcs-engine.js"></script>
+<script>
+    const controls = ['height','angle','gap','lip','extended','radius','thickness','wingShape'];
+    const elements = {};
+    controls.forEach(id => elements[id] = document.getElementById(id));
+
+    function render() {
+        const config = {};
+        controls.forEach(id => {
+            if (elements[id].type === 'range') config[id] = parseInt(elements[id].value);
+            else config[id] = elements[id].value;
+        });
+        const svgString = generateMustacheSVG(config);
+        document.getElementById('preview-svg').innerHTML = svgString.replace(/<svg[^>]*>/, '').replace(/<\/svg>/, '');
+        document.getElementById('json-output').innerText = JSON.stringify(config, null, 2);
+        document.getElementById('thickness-val').innerText = config.thickness;
+    }
+
+    controls.forEach(id => elements[id].addEventListener('input', render));
+    render();
+
+    // Presets
+    const presets = {
+        grandfather: { height: "semi", angle: "horizontal", gap: "false", lip: "linegap", extended: "false", radius: "flat", thickness: 5, wingShape: "rectangular" },
+        guy: { height: "semi", angle: "diagonal", gap: "true", lip: "linegap", extended: "false", radius: "flat", thickness: 8, wingShape: "triangular" },
+        tyrone: { height: "none", angle: "diagonal", gap: "true", lip: "linegap", extended: "false", radius: "flat", thickness: 5, wingShape: "triangular" },
+        gable: { height: "all", angle: "horizontal", gap: "true", lip: "linegap", extended: "true", radius: "flat", thickness: 7, wingShape: "rectangular" },
+        price: { height: "semi", angle: "horizontal", gap: "true", lip: "linegap", extended: "true", radius: "flat", thickness: 6, wingShape: "triangular" }
+    };
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const p = presets[btn.dataset.preset];
+            if (!p) return;
+            controls.forEach(id => {
+                if (elements[id].type === 'range') elements[id].value = p[id];
+                else elements[id].value = p[id];
+            });
+            render();
+        });
+    });
+</script>
+</body>
+</html>

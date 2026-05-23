@@ -1,0 +1,52 @@
+{
+  "grandfather": {
+    "height": "semi",
+    "angle": "horizontal",
+    "gap": "false",
+    "lip": "linegap",
+    "extended": "false",
+    "radius": "flat",
+    "thickness": 5,
+    "wingShape": "rectangular"
+  },
+  "guy": {
+    "height": "semi",
+    "angle": "diagonal",
+    "gap": "true",
+    "lip": "linegap",
+    "extended": "false",
+    "radius": "flat",
+    "thickness": 8,
+    "wingShape": "triangular"
+  },
+  "tyrone": {
+    "height": "none",
+    "angle": "diagonal",
+    "gap": "true",
+    "lip": "linegap",
+    "extended": "false",
+    "radius": "flat",
+    "thickness": 5,
+    "wingShape": "triangular"
+  },
+  "gable": {
+    "height": "all",
+    "angle": "horizontal",
+    "gap": "true",
+    "lip": "linegap",
+    "extended": "true",
+    "radius": "flat",
+    "thickness": 7,
+    "wingShape": "rectangular"
+  },
+  "price": {
+    "height": "semi",
+    "angle": "horizontal",
+    "gap": "true",
+    "lip": "linegap",
+    "extended": "true",
+    "radius": "flat",
+    "thickness": 6,
+    "wingShape": "triangular"
+  }
+}

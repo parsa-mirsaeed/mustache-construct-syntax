@@ -1,0 +1,5 @@
+MCS (Mustache Construct Syntax) - Parametric Facial Architecture
+Copyright (C) 2026 Seyed Parsa Qazi MirSaeed. All rights reserved.
+
+This system is the sole property of the author. Unauthorized use, reproduction,
+or distribution of this material, in whole or in part, is strictly prohibited.

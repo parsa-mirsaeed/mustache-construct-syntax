@@ -1,0 +1,12 @@
+{
+  "name": "mcs",
+  "version": "1.0.0",
+  "description": "Mustache Construct Syntax – Parametric Facial Hair Generator",
+  "main": "mcs-engine.js",
+  "bin": {
+    "mcs": "./cli/generate.js"
+  },
+  "scripts": {
+    "start": "echo 'Open index.html in your browser'"
+  }
+}

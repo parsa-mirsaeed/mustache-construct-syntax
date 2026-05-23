@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this work in your research, please cite it as above."
+authors:
+  - family-names: "Qazi MirSaeed"
+    given-names: "Seyed Parsa"
+    orcid: "https://orcid.org/0009-0003-3189-9039"
+title: "MCS: Mustache Construct Syntax – A Parametric Visual Language for Facial Hair"
+version: 1.0.0
+date-released: 2026-05-23
+url: "https://github.com/parsa-mirsaeed/mustache-construct-syntax"
